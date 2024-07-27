@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP32 Control</title>
+  <script>
+    async function toggleLED() {
+      const response = await fetch('http://192.168.0.105:5000/control', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ command: 'toggle_led' }),
+      });
+      const data = await response.json();
+      document.getElementById('status').innerText = data.response;
+    }
+  </script>
+</head>
+<body>
+  <h1>ESP32 Control</h1>
+  <button onclick="toggleLED()">Toggle LED</button>
+  <p id="status">Status: Unknown</p>
+</body>
+</html>
